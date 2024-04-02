@@ -2,12 +2,76 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon-32x32.png" type="image/x-icon" />
     <title>Interactive Pricing Component</title>
     <link rel="stylesheet" href="CSS/style.css" />
+    <link rel="shortcut icon" href="favicon-32x32.png" type="image/x-icon" />
   </head>
   <body>
-    <main></main>
+    <main>
+      <section class="sec1">
+        <div class="container">
+          <div class="sub-container">
+            <div class="hero-heading">
+              <div>
+                <h1 class="heading">Simple, traffic-based pricing</h1>
+                <p class="sub-heading">
+                  Sign-up for our 30-day trail. No credit card required.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="pricing">
+            <h3 class="price-page"><span id="price-view">100</span> pageviews</h3>
+            <div class="slider">
+              <input
+                class="slider-btn"
+                type="range"
+                name="range"
+                id="range"
+                min="1"
+                max="5"
+                value="3"
+                step="1"
+              />
+            </div>
+
+            <div class="amount-calc">
+              <h1 class="amount-page">$<span id="per-page-price">16</span>.00</h1>
+              <span class="per-month" id="duration">/ month</span>
+            </div>
+            <div class="dist-toggle">
+              <div class="div-billing">
+                <span class="billing"><p>Monthly Billing</p></span>
+                <div class="toggle" id="toggle">
+                  <button class="toggle-btn" id="toggle-btn"></button>
+                </div>
+              </div>
+              <div class="year-dist">
+                <span class="billing"><p>Yearly Billing</p></span>
+
+                <button class="discount">-25%</button>
+              </div>
+            </div>
+            <hr class="hr" />
+            <div class="service-cta">
+              <div class="service">
+                <ul class="service-list">
+                  <li>Unlimited webistes</li>
+                  <li>100% data ownership</li>
+                  <li>Email reports</li>
+                </ul>
+              </div>
+              <div class="cta">
+                <button class="book-cta">Start my trail</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
 
     <script src="JS/script.js"></script>
   </body>
