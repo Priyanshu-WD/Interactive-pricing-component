@@ -115,7 +115,7 @@ main {
 input[type="range"] {
   appearance: none;
   width: 90%;
-  background: transparent;
+  border-radius: 20px;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -143,25 +143,21 @@ input[type="range"]::-webkit-slider-thumb {
   cursor: e-resize;
 }
 
-input[type="range"]:hover::-webkit-slider-thumb {
+/* input[type="range"]:hover::-webkit-slider-thumb {
   background-color: #7aeadf;
 }
 
 input[type="range"]:active::-webkit-slider-thumb {
   background-color: #24aea1;
-}
+} */
 
 input[type="range"]::-webkit-slider-runnable-track {
   width: 90%;
   height: 0.8em;
   cursor: pointer;
-  background: #ecf0fb;
-  border-radius: 0.5em;
-  background-image: linear-gradient(
-    to right,
-    var(--Strong-Cyan-Slider-Backround) calc(var(--left) * 1%),
-    transparent 0%
-  );
+  /* background: #ecf0fb; */
+  border-radius: 20px;
+  /* background: linear-gradient(90deg, hsl(174, 86%, 45%) 0%, hsl(224, 65%, 95%) 100%); */
 }
 
 .amount-calc {
@@ -200,22 +196,64 @@ input[type="range"]::-webkit-slider-runnable-track {
 }
 
 .toggle {
-  width: 2.5rem;
-  height: 1rem;
-  background-color: var(--Light-Grayish-Blue-Toggle-Background);
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
+  position: relative;
+  display: inline-block;
+  width: 39px;
+  height: 20px;
+}
+/* 
+.toggle-btn {
+  width: 0;
+  height: 0;
+  opacity: 0;
+} */
+
+.tog {
+  position: absolute;
   cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 20px;
 }
 
-.toggle-btn {
-  width: 0.7rem;
-  height: 0.7rem;
+.tog:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 4px;
+  bottom: 3.5px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 20px;
+}
+
+.tog:hover {
+  background-color: var(--Strong-Cyan-Slider-Backround);
+}
+
+input:focus + .tog {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .tog:before {
+  -webkit-transform: translateX(19px);
+  -ms-transform: translateX(19px);
+  transform: translateX(19px);
+}
+
+.tog .round {
+  border-radius: 34px;
+}
+
+.tog .round::before {
   border-radius: 50%;
-  background-color: #fff;
-  border: none;
-  margin-left: 0.2rem;
 }
 
 .year-dist {
@@ -372,7 +410,7 @@ li::marker {
   .toggle {
     height: 1.2rem;
   }
-  .toggle:hover{
+  .toggle:hover {
     background-color: var(--Strong-Cyan-Slider-Backround);
   }
 }

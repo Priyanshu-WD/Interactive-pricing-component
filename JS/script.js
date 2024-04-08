@@ -1,91 +1,52 @@
 const priceView = document.querySelector("#price-view");
-const range = document.querySelector("#range");
+const range = document.querySelector('input[type="range"]');
 const perPagePrice = document.querySelector("#per-page-price");
-const toggle = document.querySelector("#toggle");
-const toggleBtn = document.querySelector("#toggle-btn");
-const duration = document.querySelector("#duration");
+const toggleBtn = document.querySelector(".toggle-btn");
 
-const VIEWS_DATA = [
-  {
-    pageViews: "10k",
-    monthlyCost: 8,
-    leftPercentage: 0,
-  },
+toggleBtn.checked = false;
+perPagePrice.innerHTML = `${range.value}`;
 
-  {
-    pageViews: "50k",
-    monthlyCost: 12,
-    leftPercentage: 25,
-  },
-  {
-    pageViews: "100k",
-    monthlyCost: 16,
-    leftPercentage: 50,
-  },
-  {
-    pageViews: "500k",
-    monthlyCost: 24,
-    leftPercentage: 75,
-  },
-  {
-    pageViews: "1M",
-    monthlyCost: 36,
-    leftPercentage: 100,
-  },
-];
-
-const getData = () => {
-  const currValue = range.value;
-  const index = currValue - 1;
-  return ({ pageViews, monthlyCost, leftPercentage } = VIEWS_DATA[index]);
-};
-
-const isAnnualFrequency = () => {
-  return toggle.click;
-};
-
-const updateMonthlyCost = () => {
-  const { monthlyCost } = getData();
-  perPagePrice.textContent = `${monthlyCost}`;
-};
-
-const updatePageViews = () => {
-  const { pageViews } = getData();
-  priceView.textContent = `${pageViews}`;
-};
-
-const updateCost = () => {
-  const { monthlyCost } = getData();
-  const isAnnual = isAnnualFrequency();
-  const price = isAnnual ? monthlyCost * 0.75 : monthlyCost;
-  perPagePrice.textContent = `${price}`;
-};
-
-const updateLeftPercentage = () => {
-  const { leftPercentage } = getData();
-  range.style.setProperty("--left", leftPercentage);
-};
-
-const updateFormOnRangeInput = () => {
-  updatePageViews();
-  updateMonthlyCost();
-  // updateCost();
-  updateLeftPercentage();
-};
-
-range.addEventListener("input", updateFormOnRangeInput);
-
-let active = 1;
-toggle.addEventListener("click", () => {
-  if (active === 1) {
-    updateCost();
-    toggleBtn.style.marginLeft = "1.4rem";
-    toggle.style.backgroundColor = "hsl(174, 86%, 45%)";
-    active = 0;
+toggleBtn.addEventListener("change", () => {
+  // Changed event type to "change"
+  if (toggleBtn.checked === true) {
+    perPagePrice.innerHTML = `${range.value * 0.75}`; // Corrected calculation
   } else {
-    // perPagePrice.textContent = ``;
-    toggleBtn.style.marginLeft = "0.2rem";
-    toggle.style.backgroundColor = "hsl(223, 50%, 87%)";
-    active = 1;
+    perPagePrice.innerHTML = `${range.value}`;
+  }
+});
+
+range.oninput = function () {
+  if (toggleBtn.checked === true) {
+    perPagePrice.innerHTML = `${range.value * 0.75}`; // Corrected calculation
+  } else {
+    perPagePrice.innerHTML = `${range.value}`;
+  }
+};
+
+range.addEventListener("input", function () {
+  let x = ((range.value - range.min) / (range.max - range.min)) * 100;
+  console.log(x)
+  let color = `linear-gradient(90deg, hsl(174, 86%, 45%) ${x}%, hsl(224, 65%, 95%) ${x}%)`;
+  range.style.background = color;
+
+  switch (range.value) {
+    case "8":
+      priceView.innerHTML = "10K";
+      break;
+    case "12":
+      priceView.innerHTML = "50k";
+      break;
+    case "16":
+      priceView.innerHTML = "100k";
+      break;
+    case "24":
+      priceView.innerHTML = "500k";
+      break;
+    case "36":
+      priceView.innerHTML = "1M";
+      break;
+
+    default:
+      break;
   }
 });
